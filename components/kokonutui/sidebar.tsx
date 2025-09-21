@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { LogOut, Menu, Briefcase, Bot, Send } from "lucide-react"
+import { LogOut, Menu, Briefcase, Bot, Send, Plus } from "lucide-react"
 
 import { Home } from "lucide-react"
 import Link from "next/link"
@@ -104,6 +104,9 @@ export default function Sidebar() {
                   </NavItem>
                   <NavItem href="/crawl-management" icon={Bot}>
                     Crawl Management
+                  </NavItem>
+                  <NavItem href="/create-crawl" icon={Plus}>
+                    Create Crawl
                   </NavItem>
                   <NavItem href="/telegram-send-management" icon={Send}>
                     Telegram Send Management
