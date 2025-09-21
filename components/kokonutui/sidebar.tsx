@@ -88,7 +88,7 @@ export default function Sidebar() {
                   Overview
                 </div>
                 <div className="space-y-1">
-                  <NavItem href="#" icon={Home}>
+                  <NavItem href="/dashboard" icon={Home}>
                     Dashboard
                   </NavItem>
                 </div>
@@ -99,13 +99,13 @@ export default function Sidebar() {
                   Management
                 </div>
                 <div className="space-y-1">
-                  <NavItem href="#" icon={Briefcase}>
+                  <NavItem href="/job-management" icon={Briefcase}>
                     Job Management
                   </NavItem>
-                  <NavItem href="#" icon={Bot}>
+                  <NavItem href="/crawl-management" icon={Bot}>
                     Crawl Management
                   </NavItem>
-                  <NavItem href="#" icon={Send}>
+                  <NavItem href="/telegram-send-management" icon={Send}>
                     Telegram Send Management
                   </NavItem>
                 </div>
