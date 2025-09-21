@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { Settings, HelpCircle, Menu, Briefcase, Bot, Send } from "lucide-react"
+import { LogOut, Menu, Briefcase, Bot, Send } from "lucide-react"
 
 import { Home } from "lucide-react"
 import Link from "next/link"
@@ -115,11 +115,8 @@ export default function Sidebar() {
 
           <div className="px-4 py-4 border-t border-gray-200 dark:border-[#1F1F23]">
             <div className="space-y-1">
-              <NavItem href="#" icon={Settings}>
-                Settings
-              </NavItem>
-              <NavItem href="#" icon={HelpCircle}>
-                Help
+              <NavItem href="#" icon={LogOut}>
+                Logout
               </NavItem>
             </div>
           </div>
