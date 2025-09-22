@@ -1,10 +1,12 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Edit } from "lucide-react"
 import Layout from "@/components/kokonutui/layout"
 
 interface TelegramChannel {
@@ -117,6 +119,7 @@ export default function TelegramChannelManagement() {
                   <TableHead>Chat ID</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Status</TableHead>
+                  <TableHead>Edit</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -138,6 +141,13 @@ export default function TelegramChannelManagement() {
                           {channel.status}
                         </Badge>
                       </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Link href={`/edit-telegram-channel/${channel.id}`}>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}
