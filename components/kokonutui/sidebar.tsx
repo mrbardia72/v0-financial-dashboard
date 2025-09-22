@@ -2,9 +2,8 @@
 
 import type React from "react"
 
-import { LogOut, Menu, Briefcase, Bot, Plus, MessageSquarePlus } from "lucide-react"
+import { LogOut, Menu, Briefcase, Bot, Plus, MessageSquarePlus, MessageCircle } from "lucide-react"
 
-import { Home } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import Image from "next/image"
@@ -86,7 +85,7 @@ export default function Sidebar() {
                   Overview
                 </div>
                 <div className="space-y-1">
-                  <NavItem href="/dashboard" icon={Home}>
+                  <NavItem href="/dashboard" icon={Briefcase}>
                     Dashboard
                   </NavItem>
                 </div>
@@ -108,6 +107,9 @@ export default function Sidebar() {
                   </NavItem>
                   <NavItem href="/add-telegram-channel" icon={MessageSquarePlus}>
                     Add Telegram Channel
+                  </NavItem>
+                  <NavItem href="/telegram-channel-management" icon={MessageCircle}>
+                    Telegram Channel Management
                   </NavItem>
                 </div>
               </div>
