@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { LogOut, Menu, Briefcase, Bot, Send, Plus } from "lucide-react"
+import { LogOut, Menu, Briefcase, Bot, Plus, MessageSquarePlus } from "lucide-react"
 
 import { Home } from "lucide-react"
 import Link from "next/link"
@@ -75,9 +75,7 @@ export default function Sidebar() {
                 height={32}
                 className="flex-shrink-0 block dark:hidden"
               />
-              <span className="text-lg font-semibold hover:cursor-pointer text-gray-900 dark:text-white">
-                KokonutUI
-              </span>
+              <span className="text-lg font-semibold hover:cursor-pointer text-gray-900 dark:text-white">Labdon</span>
             </div>
           </Link>
 
@@ -108,8 +106,8 @@ export default function Sidebar() {
                   <NavItem href="/create-crawl" icon={Plus}>
                     Create Crawl
                   </NavItem>
-                  <NavItem href="/telegram-send-management" icon={Send}>
-                    Telegram Send Management
+                  <NavItem href="/add-telegram-channel" icon={MessageSquarePlus}>
+                    Add Telegram Channel
                   </NavItem>
                 </div>
               </div>
