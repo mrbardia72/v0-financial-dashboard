@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Checkbox } from "@/components/ui/checkbox"
 import { CheckCircle } from "lucide-react"
 
 interface Job {
@@ -28,9 +29,29 @@ export default function EditJob() {
   const [job, setJob] = useState<Job | null>(null)
   const [formData, setFormData] = useState({
     name: "",
-    schedule: "",
+    selectedDays: [] as string[],
+    time: "",
     status: "active" as "active" | "inactive",
   })
+
+  const weekdays = [
+    { id: "monday", label: "Monday" },
+    { id: "tuesday", label: "Tuesday" },
+    { id: "wednesday", label: "Wednesday" },
+    { id: "thursday", label: "Thursday" },
+    { id: "friday", label: "Friday" },
+    { id: "saturday", label: "Saturday" },
+    { id: "sunday", label: "Sunday" },
+  ]
+
+  // Generate time options (24-hour format)
+  const timeOptions = []
+  for (let hour = 0; hour < 24; hour++) {
+    for (let minute = 0; minute < 60; minute += 30) {
+      const timeString = `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`
+      timeOptions.push(timeString)
+    }
+  }
 
   // Mock data - in real app this would come from API
   const mockJobs: Job[] = [
@@ -82,11 +103,20 @@ export default function EditJob() {
       setJob(foundJob)
       setFormData({
         name: foundJob.name,
-        schedule: foundJob.schedule,
+        selectedDays: ["monday", "tuesday", "wednesday", "thursday", "friday"], // Default to weekdays
+        time: "09:00",
         status: foundJob.status,
       })
     }
   }, [params.id])
+
+  const handleDayChange = (dayId: string, checked: boolean) => {
+    if (checked) {
+      setFormData({ ...formData, selectedDays: [...formData.selectedDays, dayId] })
+    } else {
+      setFormData({ ...formData, selectedDays: formData.selectedDays.filter((day) => day !== dayId) })
+    }
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -123,7 +153,7 @@ export default function EditJob() {
           <CardDescription>Modify the job settings and schedule below.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="name">Job Name</Label>
               <Input
@@ -135,15 +165,44 @@ export default function EditJob() {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="schedule">Schedule</Label>
-              <Input
-                id="schedule"
-                value={formData.schedule}
-                onChange={(e) => setFormData({ ...formData, schedule: e.target.value })}
-                placeholder="e.g., Every day at 6:00 AM"
-                required
-              />
+            <div className="space-y-4">
+              <Label>Schedule</Label>
+
+              <div className="space-y-3">
+                <div>
+                  <Label className="text-sm font-medium">Days of Week</Label>
+                  <div className="grid grid-cols-2 gap-3 mt-2">
+                    {weekdays.map((day) => (
+                      <div key={day.id} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={day.id}
+                          checked={formData.selectedDays.includes(day.id)}
+                          onCheckedChange={(checked) => handleDayChange(day.id, checked as boolean)}
+                        />
+                        <Label htmlFor={day.id} className="text-sm font-normal">
+                          {day.label}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="time">Time</Label>
+                  <Select value={formData.time} onValueChange={(value) => setFormData({ ...formData, time: value })}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select time" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60">
+                      {timeOptions.map((time) => (
+                        <SelectItem key={time} value={time}>
+                          {time}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
             </div>
 
             <div className="space-y-2">
